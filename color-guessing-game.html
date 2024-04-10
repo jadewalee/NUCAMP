@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>COLOR GUESSING GAME</h1>
+    <h2>Here are the list of colors you can guess from: <p id="arraylist"></p></h2>
+
+    <button type="button" onclick="runGame()"> Start Game</button>
+
+    <script type="text/javascript">
+
+        let colorArry = ['blue', 'cyan', 'gold', 'grey', 'green', 'magenta', 'orange', 'red', 'white', 'yellow'];
+
+        function runGame() {
+            let guess = ''
+            let correct = false;
+            let numTries = 0;
+            const targetIndex = colorArry[Math.floor(Math.random() * (colorArry.length - 1)) + 1]
+            const target = console.log(targetIndex);
+            do {
+                guess = prompt('I am thinking of one of these colors:\n\n' + colorArry + '\n\nWhat color am I thinking of?\n')
+                if (guess == null) {
+                    return alert('The Game was Aborted');
+
+                } else if (!guess) {
+                    alert('The Game was Aborted')
+                    
+                }
+               
+                numTries++
+                correct = checkGuess(guess, targetIndex);
+            }
+            while (!correct)
+            alert('WOW! Your guess was correct' + '\n' + 'You had a total of ' + numTries + ' Attempt(s)' + '\n' + 'click OK to see your guessed color')
+            document.body.style.background = guess;
+        }
+
+        function checkGuess(guess, targetIndex) {
+            let correct = false;
+            if (!colorArry.includes(guess)) {
+                alert('Sorry I do not recognize this color  Try Again !')
+            } else if (colorArry.indexOf(guess) > colorArry.indexOf(targetIndex)) {
+                alert('Guess is incorrect and Higher than target')
+            } else if (colorArry.indexOf(guess) < colorArry.indexOf(targetIndex)) {
+                alert('Guess is incorrect and lower than target')
+            }  else {
+              correct = true;
+            }
+            return correct;
+        }
+
+      const ArrayList = colorArry.sort().join('-').toUpperCase();
+      document.getElementById('arraylist').innerHTML = ArrayList;
+    </script>
+</body>
+
+</html>
